@@ -124,6 +124,9 @@ impl DarwinMouseManager {
                     _ => None,
                 };
 
+                let emulated = CGEventGetIntegerValueField(cg_event, 41); // kCGEventSourceUnixProcessID
+                println!("Emulated: {:?}", emulated);
+
                 match (mouse_event, &mut CALLBACKS) {
                     (Some(event), Some(callbacks)) => {
                         for callback in callbacks.lock().unwrap().values() {
